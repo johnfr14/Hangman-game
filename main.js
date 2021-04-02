@@ -36,9 +36,9 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
 
 
   //-----------------------------START GAME------------------------------------//
+  let h = 0
   while (life && wordToFind.includes('_')) {
     // displaying the hanging
-    let h = 0
     console.log(HANGMANPICS[h])
 
     // Player choose a letter (very stressful !!!!)
