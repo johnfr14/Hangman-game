@@ -18,7 +18,7 @@ while(true){
   console.log('BOONjour BONjour tout le monde et bienvenue dans le jeu du PENDU GAME !!!!!!!')
 
   // Getting the player's data 
-  console.log('\nVeuillez dans un premier tant nous donner votre joli petit nom\n(entre 1 et 20 charactères svp faite pas le forceur)\n')
+  console.log('\nVeuillez dans un premier temps nous donner votre joli petit nom\n(entre 1 et 20 charactères svp faite pas le forceur)\n')
 
   let life = 7
   let joueurId = readline.question('votre nom: ')
