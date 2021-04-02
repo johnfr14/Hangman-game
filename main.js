@@ -1,6 +1,7 @@
 const fs = require('fs')
 const readline = require('readline-sync')
 const { randomInt } = require('crypto')
+const { HANGMANPICS } = require('./template-hangman')
 
 while(true){
   //--------------------------------INTRO-----------------------------------------//
@@ -37,6 +38,9 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
   //-----------------------------START GAME------------------------------------//
   while (life && wordToFind.includes('_')) {
     // displaying the hanging
+    let h = 0
+    console.log(HANGMANPICS[h])
+
     // Player choose a letter (very stressful !!!!)
     let letter = ''
     console.log(`Le mot : ${wordToFind.join(' ')}\t\tvie restant : ${life}`)
@@ -56,6 +60,7 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
       console.log('\nBien joué !!!\n')
     } else {
       life--
+      h++
       console.log(`\nAie aie aie ! coups dure pour le joueur français !\n-1 point il ne vous reste que ${life} vies\n`)
     }
     wordAlreadyUsed.push(letter)
