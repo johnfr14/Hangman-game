@@ -81,10 +81,12 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
 
   if (life === 0) {
     console.log('GAME OVER !\n\n')
+    console.log(`Le mot était : ${mysteryWord}`)
     let choice = readline.question('Voulez-vous rejouer ?\nYes [y]\nNo [n]\nVotre choix : ')
     choice === 'y' ? '' : process.exit(1)
   } else {
     console.log('YOU WIN !!!\n\n')
+    console.log(`Le mot était bien : ${mysteryWord} !!!!!`)
     let choice = readline.question('Voulez-vous rejouer ?\nYes [y]\nNo [n]\nVotre choix : ')
     choice === 'y' ? '' : process.exit(1)
   }
