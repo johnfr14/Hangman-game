@@ -119,7 +119,7 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
     objScore.score[i][1] = score[i][1]
   }
   // and we send it back to our JSON data base
-    fs.writeFileSync('./highScor.json', JSON.stringify(objScore))
+    fs.writeFileSync('./highScore.json', JSON.stringify(objScore))
  
   
 
