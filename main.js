@@ -2,20 +2,24 @@ const fs = require('fs')
 const readline = require('readline-sync')
 const { randomInt } = require('crypto')
 const { HANGMANPICS } = require('./template-hangman')
-const { Joueur } = require('./joueur')
 const chalk = require('chalk')
 
 do{
   //--------------------------------INTRO-----------------------------------------//
+  // Recuperation of score
+  let objScore = fs.readFileSync('./highScore.json', 'utf-8')
+  objScore = JSON.parse(objScore)
+  let score = []
+  for (let i = 0; i < 3; i++) {
+    score.push(objScore.score[i].map(a => a))
+  }
+  console.log(score)
   // initialisation of the mystery word 
   let dico = fs.readFileSync('./dictionnaire', 'utf-8').toLowerCase().split('\n')                     // we recupe all the words in our dictionnary and store them in a array 
   let n = randomInt(0, dico.length)                                                                   // we create an random number as an index to get a random word 
   let mysteryWord = dico[n].split('')                                                                 // ↑                                                         ↑
   let wordAlreadyUsed = []
-  let wordToFind = []                                                                                  //
-  for (let i = 0; i < mysteryWord.length; i++) {                                                       // Filling the string with underscores when player will find the good letters this will be displayed
-    wordToFind.push('_')                                                                               //
-  }
+  let wordToFind = Array(mysteryWord.length).fill('_')                                                                                  //
 
   console.log(chalk.bold('BOONjour BONjour tout le monde et bienvenue dans le jeu du PENDU GAME !!!!!!!'))
 
@@ -74,13 +78,29 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
 
 
   //------------------------------END OF THE GAME---------------------------------//
-  // We save the score if new high score !!!
-
-  // Start again ?
   for (let i = 0; i < 20; i++) {
     console.log('')
   }
 
+  // We save the score if new high score !!!
+  score.push([joueurId, life])
+  score.sort((a,b) => a[1] - b[1]).reverse()
+  console.log(chalk.cyanBright('HIGH SCORE\n'))
+  for (let i = 0; i < score.length; i++) {
+    score[i][0] === joueurId ? console.log(chalk.blue(`${score[i][0]} : ${score[i][1]} life remaining`)) : console.log(`${score[i][0]} : ${score[i][1]} life remaining`)
+  }
+  score.pop()
+  // we update our new score array
+  for (let i = 0; i < 3; i++) {
+    objScore.score[i][0] = score[i][0]
+    objScore.score[i][1] = score[i][1]
+  }
+  // and we send it back to our JSON data base
+  fs.writeFileSync('./highScore.json', JSON.stringify(objScore))
+
+
+  
+  // Start again ?
   if (life) {
     console.log(chalk.green('YOU WIN !!!'))
     console.log(`Le mot était bien : ${mysteryWord.join('')} !!!!!\n\n`)
