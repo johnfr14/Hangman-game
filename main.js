@@ -16,10 +16,7 @@ do{
   }
   // we parse it and create a new array of the previous score to better handle it
   objScore = JSON.parse(objScore)
-  let score = []
-  for (let i = 0; i < 3; i++) {
-    score.push(objScore.score[i].map(a => a))
-  }
+  
 
 
   // initialisation of the mystery word 
@@ -106,18 +103,14 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
   }
 
   // We save the score if new high score !!!
-  score.push([joueurId, life])
-  score.sort((a,b) => a[1] - b[1]).reverse()
+  objScore.score.push([joueurId, life])
+  console.log(objScore)
+  objScore.score.sort((a,b) => a[1] - b[1]).reverse()
   console.log(chalk.cyanBright('HIGH SCORE\n'))
-  for (let i = 0; i < score.length; i++) {
-    score[i][0] === joueurId ? console.log(chalk.blue(`${score[i][0]} : ${score[i][1]} life remaining`)) : console.log(`${score[i][0]} : ${score[i][1]} life remaining`)
+  for (let i = 0; i < objScore.length; i++) {
+    objScore.score[i][0] === joueurId ? console.log(chalk.blue(`${objScore.score[i][0]} : ${objScore.score[i][1]} life remaining`)) : console.log(`${objScore.score[i][0]} : ${objScore.score[i][1]} life remaining`)
   }
-  score.pop()
-  // we update our object with potential new score
-  for (let i = 0; i < 3; i++) {
-    objScore.score[i][0] = score[i][0]
-    objScore.score[i][1] = score[i][1]
-  }
+ 
   // and we send it back to our JSON data base
     fs.writeFileSync('./highScore.json', JSON.stringify(objScore))
  
