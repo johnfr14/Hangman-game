@@ -5,6 +5,7 @@
   "author": "johnfr14 <jonathan.alyra@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^4.1.0",
     "readline-sync": "^1.4.10"
   }
 }
