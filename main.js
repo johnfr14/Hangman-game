@@ -28,7 +28,7 @@ do{
     process.exit(1)
   }
 
-  let n = randomInt(0, dico.length)                                                                   // we create an random number as an index to get a random word 
+  let n = randomInt(0, dico.length)                                                                   // we create a random number as an index to get a random word 
   let mysteryWord = dico[n].split('')                                                                 // ↑                                                         ↑
   let wordAlreadyUsed = []
   let wordToFind = Array(mysteryWord.length).fill('_')                                                
@@ -104,15 +104,16 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
 
   // We save the score if new high score !!!
   objScore.score.push([joueurId, life])
-  console.log(objScore)
-  objScore.score.sort((a,b) => a[1] - b[1]).reverse()
+  objScore.score.sort((a,b) => b[1] - a[1])
   console.log(chalk.cyanBright('HIGH SCORE\n'))
-  for (let i = 0; i < objScore.length; i++) {
+  for (let i = 0; i < objScore.score.length; i++) {
     objScore.score[i][0] === joueurId ? console.log(chalk.blue(`${objScore.score[i][0]} : ${objScore.score[i][1]} life remaining`)) : console.log(`${objScore.score[i][0]} : ${objScore.score[i][1]} life remaining`)
   }
+  objScore.score.pop()
  
   // and we send it back to our JSON data base
-    fs.writeFileSync('./highScore.json', JSON.stringify(objScore))
+  objScore = JSON.stringify(objScore)
+  fs.writeFileSync('./highScore.json', objScore)
  
   
 
