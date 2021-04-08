@@ -98,9 +98,7 @@ Si tu fais ${life} erreurs, tu seras...... MORT !!!!!\n\nà toi de jouer`)
 
   //------------------------------END OF THE GAME---------------------------------//
   // put a bit space in that mess
-  for (let i = 0; i < 20; i++) {
-    console.log('')
-  }
+  console.clear()
 
   // We save the score if new high score !!!
   objScore.score.push([joueurId, life])
